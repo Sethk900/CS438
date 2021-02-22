@@ -1,0 +1,50 @@
+Seth King
+Dr. Kolias
+CS438 - Initial Project Meeting Notes
+05 February 2021
+
+Purpose of meeting: Identify what we can and cannot do 
+
+What Costas had in mind:
+	- A GNS3 implementation of what a TOR structure would look like
+	- So, whenever Bob and Alice want to gain anonymity, they can use that structure. 
+	- That is, we will have to implement servers
+
+Tor has an input layer and exit layer, and has several layers in between. Two hosts communicate through this structure. 
+As a first step, create this infrastructure in GNS3. 
+	- The software for the input/ouptut/layer servers are open source
+
+So, set up input/output layer, create several layers, and be able to take advantage of the network structure as if it were a real TOR structure as if it were a real 
+TOR infrastructure. 
+
+We will have to create Docker containers or VMs that have the Tor software running. 
+	- Emphasized that either VMs or containers would be acceptable for this task
+	- This is the most important goal
+
+EXTRA CREDIT: Set up a hidden service that is a service inside the infrastructure, and which hosts can access from outside of the layers.
+	- Basically hiding a server in the layers
+
+Before we start out working on the GNS3 part of this project, we should get familiar with how TOR works (i.e. understand the fundamental routing concepts)
+
+Explain, in our presentation:
+	- How TOR works
+	- What one can achieve with TOR (in terms of anonymity)
+	- What this means in terms of hidden services
+	- How we implemented a TOR-like service in GNS3
+
+Possible directions: implement already-existing Tor services in GNS3
+	- Write python scripts that mimic Tor onion routing to provide anonymity to users
+	- Forget about the implementation: investigate how to break anonymity (this will be reading-intensive, identifying and analyszing papers that explain how to break Tor)
+
+By the time that we meet for the midterm exam, we should have a clear vision of which direction we want to take for the project. So, prior to this meeting:
+	- Research/learn about Tor
+	- Decide which direction to go in with the project
+	- Take the first steps towards pursuing that option (i.e. download/play around with Tor VMs or identify 3 or 4 papers that we want to analyze)
+
+Components of project:
+	1. Cryptographic (describe how Tor works)
+	2. Application (explain why it matters)
+	3. Implementation (emulate it)
+		a. GNS3
+		b. Python
+		c. Survey

@@ -1,0 +1,27 @@
+Seth King
+Dr. Kolias
+CS438 - Semester Project Standup Meeting 
+19 February 2021
+
+Updates:
+	- Project team members watched the study material videos that Dr. Kolias provided to us via BBLearn
+	- Consensus is that our of the 3 project options presented to us, we will pursue a Tor implementation on GNS3 
+		- If we have time, we may also attempt to implement a hidden service
+	- The implmentation won't be conceptually difficult, but the technical details could get messy
+
+Collaboration methods:
+	- GNS3 does not allow for easy collaboration. How we might get around this:
+		- During working sessions, have one person editing the topology and everyone else can provide input
+		- Everyone can attempt to implement simple TOR topologies on their own
+		- Code and other files can still be shared over Discord, a fileshare, or GitHub
+
+Action items going forward:
+	- Midterm coming up on March 11:
+		- Know how TOR works (and be able to explain technical details)
+		- Be able to explain our goals for the project and timeline prior to the end of the semester 
+	- Prior to 26Feb standup:
+		- Solidify technical understanding of TOR and start to think about specifics of our GNS3 implementation
+		- If you have time, start to play around with messaging/routing scripts that could be used for a simple TOR GNS3 implementation
+		- Check out the resources that Keller shared over Discord (Tor Project FAQs/Ubuntu VM installation instructions)
+
+Next standup is 26Feb

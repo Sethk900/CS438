@@ -1,0 +1,78 @@
+Seth King
+Dr. Kolias 
+Semester Project - Video Notes
+19 February 2021
+
+Video 1: Onion Routing and TOR (Part 1): Motivation and Introduction, by Sourcefire on YouTube
+Suppose Alice wants to send Bob a packet. The packet will contain information about the source (Alice's IP Address) and destination (Bob's IP Address)
+Underneath the hood, the data packet is routed over the Internet through a series of routers. Each router looks at the data packet that comes in and routes
+it closer and closer to Bob until the packet finally reaches its intended topic. 
+One notable feature about how packet routing is done: this process does not preserve the privacy of Alice or Bob, and any router along the way can determine that
+Alice and Bob are communicating, since Alice and Bob's unencrypted IP addresses are contained in the packets. 
+Thus, third parties can easily determine that Alice and Bob are communicating. 
+Onion routing solves this problem by allowing Bob and Alice to communicate without incorporating their unencrypted IPs in the entire routing process. 
+Imagine that Bob and Alice are communicating, but this time with several intermediary entities named Carol, Ted, and Dave. 
+	- Alice takes her message and puts it in an envelope (this is a physical analogy to a technical process)
+	- Alice then takes the envelope and puts it inside a second envelope that has Ted's mailing address on it.
+	- She then takes that envelope and puts it inside another envelope, labeled with Dave's mailing address.
+	- Then, that envelope is put inside a fourth envelope that has Carol's mailing address on it.
+	- The end result is a message that is sent between many entities and ultimately is routed to the intended entitity. 
+In short, onion routing is a way to achieve this concept but with messaging over the Internet.
+TOR = The Onion Router.
+
+Video 2: Onion Routing - Computerphile
+"Dark Web" mostly refers to TOR and TOR hidden services, but instead we want to talk about onion routing today
+TOR is an implementation of onion routing
+	- Provides anonymity in messaging over the Internet
+A client will bounce their connection around and have it eventually reach that server
+	- The last node to bounce the connection before the server will look like it's the one communicating with the server
+	- Multiple levels of encryption will also be used in order to deter men in the middle
+Routing your communication through multiple hosts makes tracing back communications a pain, but is still doable. Thus, in order to achieve real anonymity,
+we need to establish multiple levels of communication. 
+	- So, imagine that we have secure symmetric keys established with several of the routing machines
+		- This is quite doable with moden asymmetric/symmetric key exchange
+	- Now, the original message is encrypted with each of these symmetric keys
+		- So, the first router decrypts the first layer, the second router decrypts the second layer, etc. until it reaches the router
+	- On the way back, the exact opposite happens. 
+		- Thus, once the response reaches the original sender, it is encrypted with all of the symmetric keys and can only be encrypted by a single 
+		client (i.e. the original sender) if they have all of the necessary keys, which the sender does 
+Because of all these steps, TOR is much slower than conventional browsers
+If you sign in to a server while on TOR, you will no longer have anonymity
+	- You still have to use TLS/HTTPS connections to the actual server. Otherwise, man-in-the-middle attacks can snatch your credentials
+If you're spying at the front of the network AND at the exit node, you can start to determine what is actually going on
+	- This is TOR's main weakness. 
+The blocks are always 512 bytes long.
+
+Video 3: TOR Hidden Services - Computerphile
+A controversial topic: much of what happens on the dark web is illegal
+The majority of what happens on TOR in general is perfectly fine - just users browsing harmless sites anonymously
+Recall that if a listener is listening at entry point (point A) and exit point (point B), they can figure out what is going on and defeat TOR
+	- A hidden service runs INSIDE the cloud, so there is no exit point, meaning that it is impossible to correlate traffic
+	- TOR does this by forming a protocol where neither A (the client) or the server know who each other are
+	- Hidden services is predominantly the domain of TOR, even though there are other anonymity networks
+So, we have a client, a server, and several onion routers between them.
+	- Hidden services anonymize the server on the other side
+		- obviously, no logins can happen, but this is a given
+	- TOR picks three onion routers at random and names them as introduction points
+	- Creates a hidden service descriptor which includes the server's public key and the IPs of the 3 introduciton points
+	- The key for such a hash table is the onion address derived fro the IP of a given hidden service's IP address
+	- Hidden services are not publicized: you have to know about them beforehand, yielding inherent security
+	- So, client basically asks IP to introduce them to the server, then the client chooses a rendesvous point, creates a TOR circuit to that point, sends a message
+	to the RP asking it to introduce it to the server through a specific IP by sending a specific string, which is then forwarded to the server, and then the server can 
+	either choose to try to create a connection or do nothing
+	- If server decides to connect, it creates its own circuit across the network to the RP
+	- server sends a cookie to the RP
+	- RP looks at the two cookies (from client and server)
+		- If they match up, the RP acts as a typical onion router and connects the client and the server
+	- In total, there are at least 6 hops in this process, which means that it will be quite a bit slower than normal TOR
+		- The upside is that there is no way of correlating traffic in this process
+	
+
+
+
+
+
+
+
+
+
