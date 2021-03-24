@@ -11,6 +11,14 @@
 # To do:
 #	- Modify receivemessage.py so that it stops executing after receiving a message
 
+echo "Entering infinite loop. Use a keyboard interrupt (Ctrl + C) to stop the script."
+
+while [ 1 -eq 1 ]
+do
+
+echo Enter a message to send to the server:
+read message
+
 echo Generating symmetric keys...
 openssl rand -hex -out node1.key 16
 openssl rand -hex -out node2.key 16
@@ -28,7 +36,7 @@ python3 sendmessage.py node3.enc 192.168.1.103 80
 
 echo Packing the envelope...
 echo "192.168.1.104" > envelope
-echo "Hello, Server!" >> envelope
+echo $message >> envelope
 openssl aes-128-ecb -e -K $(cat node3.key) -in envelope -out envelope
 echo "192.168.1.103" > temp
 cat envelope >> temp
@@ -44,6 +52,7 @@ python3 sendmessage.py envelope 192.168.1.101 80
 
 python3 receivemessage.py 192.168.1.105 80
 mv temp.bin serverResponse.txt
-echo Response received!!
+echo Response received:
 cat serverResponse.txt
 
+done
