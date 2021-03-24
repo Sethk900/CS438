@@ -6,6 +6,11 @@
 
 # This script is intended to be run on the second node in the layer network.
 
+echo "Entering infinite loop. Use a keyboard escape (Ctrl + C) to end script execution."
+
+while[1 -eq 1] # Execute in infinite loop, until keyboard interrupt
+do
+
 echo Listening for symmetric key...
 python3 receivemessage.py 192.168.1.102 80
 mv temp.bin node2.enc
@@ -27,4 +32,5 @@ rm temp
 echo Envelope decrypted. Forwarding message to next layer...
 python3 sendmessage.py envelope $IP 80
 
+done
 
