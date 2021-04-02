@@ -13,6 +13,7 @@ mv temp.bin message.txt
 echo Message received! Message contents:
 cat message.txt
 
-echo "Thanks for the message!" > reply.txt
+echo "Message received: " > reply.txt
+cat message.txt >> reply.txt
 sendmessage.py reply.txt 192.168.1.103 80
 
