@@ -51,8 +51,25 @@ echo Sending the envelope...
 python3 sendmessage.py envelope 192.168.1.101 80
 
 python3 receivemessage.py 192.168.1.105 80
-mv temp.bin serverResponse.txt
-echo Response received:
-cat serverResponse.txt
+mv temp.bin serverResponse.enc
+echo Response received. Unpacking the envelope...
+openssl aes-128-ecb -d -K $(cat node1.key) -in serverResponse.enc -out envelope
+IP=$(awk '{print $1}' envelope)
+awk '{print $2}' envelope > temp
+cp temp envelope
+rm temp
+openssl aes-128-ecb -d -K $(cat node2.key) -in envelope -out envelope
+IP=$(awk '{print $1}' envelope)
+awk '{print $2}' envelope > temp
+cp temp envelope
+rm temp
+openssl aes-128-ecb -d -K $(cat node3.key) -in envelope -out envelope
+IP=$(awk '{print $1}' envelope)
+awk '{print $2}' envelope > temp
+cp temp envelope
+rm temp
+
+echo Response decrypted. The server said:
+cat envelope
 
 done
